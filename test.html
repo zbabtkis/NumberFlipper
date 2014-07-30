@@ -8,10 +8,10 @@
   <body>
     <div id='myflipper'></div>
 
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
     <script src="src/number-flipper.js"></script>
     <script>
-      new NumberFlipper($("#myflipper"), 2).run(23);
+      new NumberFlipper(document.getElementById("myflipper"), 2).run(23);
     </script>
   </body>
 
