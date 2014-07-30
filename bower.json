@@ -1,0 +1,27 @@
+{
+  "name": "number-flipper",
+  "version": "1.0.0",
+  "homepage": "https://github.com/zigzackattack/NumberFlipper",
+  "authors": [
+    "zack <zack@sectionstudios.com>"
+  ],
+  "description": "Like a train arrivals board in your browser",
+  "main": "src/number-flipper.js",
+  "keywords": [
+    "rolodex",
+    "number",
+    "flipper",
+    "animation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}
