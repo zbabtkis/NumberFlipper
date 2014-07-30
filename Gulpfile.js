@@ -5,13 +5,13 @@ var gulp = require('gulp')
 gulp.task('uglify', function() {
   gulp.src('src/number-flipper.js')
     .pipe(uglify())
-    .pipe(gulp.dest('dist/number-flipper.min.js'));
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('cssmin', function() {
   gulp.src('css/number-flipper.css')
     .pipe(cssmin())
-    .pipe(gulp.dest('dist/number-flipper.min.css'));
+    .pipe(gulp.dest('dist/'));
 });
 
 gulp.task('default', ['cssmin', 'uglify']);
