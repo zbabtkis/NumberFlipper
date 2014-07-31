@@ -5,7 +5,7 @@
 ;(function(exports) {
   "use strict";
 
-  var El = exports.jQuery || function(el) {
+  var El = function(el) {
     var CLASS_SEPARATOR = " ";
 
     el.addClass = function(className) {
