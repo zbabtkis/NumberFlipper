@@ -12,16 +12,16 @@ gulp.task('test', function() {
 });
 
 gulp.task('watch', function() {
-	gulp.watch('src/*.js', ['test']);
+	gulp.watch('src/*.js', ['test', 'uglify']);
 	gulp.watch('test/*.js', ['test']);
 });
 
 gulp.task('uglify', function() {
   gulp.src([
-		'src/helpers.js'], 
-		['src/number-flipper.js'])
-    .pipe(uglify())
-    .pipe(gulp.dest('dist/'));
+		'src/helpers.js', 
+		'src/number-flipper.js'])
+    .pipe(uglify({outSourceMap: true}))
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('cssmin', function() {

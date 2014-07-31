@@ -25,6 +25,19 @@
     this.setLayer(Flipper.Layers.FLIP, this.createTile(0)).show();
   };
 
+  Flipper.RAM = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame;
+
+	// RequestAnimationFrame shim
+  Flipper.RAM = Flipper.RAM || function(cb) {
+  	Flipper.RAM.state = Flipper.RAM.state || 0;
+		setTimeout(function() {
+			var args = [].slice.call(arguments, 0);
+			args.push(Flipper.RAM.state)
+			cb.apply(window, args);
+			Flipper.RAM.state += 1000/60; 
+		}, 1000/60);
+	};
+
   // Class methods
   Flipper.FlipRange = function (start, end) {
     var arr = [];
@@ -179,7 +192,7 @@
       , progress;
     
     if(!time) {
-      requestAnimationFrame(El.bind(this.flipAway, this, flip, d, null));
+      Flipper.RAM(El.bind(this.flipAway, this, flip, d, null));
       return d.promise();
     }
     
@@ -198,7 +211,7 @@
       return d.resolve();
     }
     
-    requestAnimationFrame(El.bind(this.flipAway, this, flip, d, start));
+    Flipper.RAM(El.bind(this.flipAway, this, flip, d, start));
   };
 
   Flipper.prototype.setupFinalFlip = function(flip) {
@@ -217,7 +230,7 @@
       , progress;
       
     if(!time) {
-      requestAnimationFrame(El.bind(this.flipIn, this, flip, d, null));
+      Flipper.RAM(El.bind(this.flipIn, this, flip, d, null));
       return d.promise();
     }
     
@@ -238,7 +251,7 @@
       return d.resolve(time);
     }
     
-    requestAnimationFrame(El.bind(this.flipIn, this, flip, d, start));
+    Flipper.RAM(El.bind(this.flipIn, this, flip, d, start));
   };
 
   Flipper.prototype.teardown = function() {
