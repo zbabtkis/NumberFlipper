@@ -5,149 +5,18 @@
 ;(function(exports) {
   "use strict";
 
-  var El = function(el) {
-    var CLASS_SEPARATOR = " ";
+	// DOM helpers (jQuery alternative)
+	var El = exports.NumberFlipperEl;
 
-    el.addClass = function(className) {
-      var cs = el.className ? CLASS_SEPARATOR : "";
-      if(! el.className.match(className)) {
-        this.className = this.className + cs + className;
-      }
-      
-      return this;
-    };
-
-    el.removeClass = function(className) {
-      this.className.replace(CLASS_SEPARATOR + className, "");
-      this.className.replace(className, "");
-
-      return this;
-    };
-
-    el.remove = function() {
-      if(this.parentNode) {
-        this.parentNode.removeChild(el);
-      }
-
-      return this;
-    };
-
-    // hide
-    el.hide = function() {
-      this.style.display = 'none';
-
-      return this;
-    };
-
-    // append
-    el.append = function(child) {
-      this.appendChild(child);
-
-      return this;
-    };
-
-    // appendTo
-    el.appendTo = function(par) {
-      this.remove();
-      par.append(this);
-
-      return this;
-    };
-
-    // show
-    el.show = function() {
-      this.style.display = 'block';
-
-      return this;
-    };
-
-    el.css = function(attr, style) {
-      var _this = this;
-
-      function getSafeStyleName(attr) {
-        var split = attr.split('-')
-          , safeName = "";
-
-        El.each(split, function(ind, name) {
-          if(ind === 0 || ind === 1 && split[0] === "") {
-            safeName += name.toLowerCase();
-          } else {
-            safeName += name.slice(0, 1)
-              .toUpperCase() 
-            safeName += name.slice(1)
-              .toLowerCase();
-          }
-        });
-
-        return safeName;
-      }
-
-      function mapStyle(a, s) {
-        _this.style[getSafeStyleName(a)] = s;
-      }
-
-      if(typeof attr === 'string') {
-        mapStyle(attr, style);
-      } else if(typeof attr === 'object') {
-        El.each(attr, mapStyle);
-      }
-
-      return this;
-    };
-
-    el.html = function(html) {
-      this.innerHTML = html;
-
-      return this;
-    };
-
-    el.text = function(text) {
-      var tn = document.createTextNode(text);
-      this.html('');
-      this.append(tn);
-
-      return this;
-    };
-
-    return el;
-  };
-
-  El.each = El.each || function(list, cb) {
-    for(var i = 0, j=list.length; i < j; i++) {
-      cb(i, list[i]);
-    } 
-  };
-
-  El.Deferred = El.Deferred || function() {
-    var _cbs = [];
-
-    return {
-      promise: function() {
-        return {
-          then: function(fn) {
-            _cbs.push(fn); 
-          }
-        };
-      },
-      resolve: function(data) {
-        El.each(_cbs, function(ind, cb) {
-          cb(data);
-        });
-      }
-    };
-  };
-
-  exports.El = El;
-
-  var Flipper = function($el, mf) {
-    this.$el = $el;
+  var Flipper = function(el, mf) {
+    this.el = el;
     this.mf  = mf;
     this._domLayers = [];
     
-    $el.addClass('flipper');
+    el.addClass('flipper');
     
-    this.increase = this.increase.bind(this);
-    this.decrease = this.decrease.bind(this);
+    this.increase = El.bind(this.increase, this);
+    this.decrease = El.bind(this.decrease, this);
     
     this._events = {};
     
@@ -280,7 +149,7 @@
       .css('z-index', index)
       .addClass('tile')
       .addClass(Flipper.Classes[index])
-      .appendTo(this.$el);
+      .appendTo(this.el);
 
     return this._domLayers[index];
   };
@@ -310,7 +179,7 @@
       , progress;
     
     if(!time) {
-      requestAnimationFrame(this.flipAway.bind(this, flip, d, null));
+      requestAnimationFrame(El.bind(this.flipAway, this, flip, d, null));
       return d.promise();
     }
     
@@ -329,7 +198,7 @@
       return d.resolve();
     }
     
-    requestAnimationFrame(this.flipAway.bind(this, flip, d, start));
+    requestAnimationFrame(El.bind(this.flipAway, this, flip, d, start));
   };
 
   Flipper.prototype.setupFinalFlip = function(flip) {
@@ -348,7 +217,7 @@
       , progress;
       
     if(!time) {
-      requestAnimationFrame(this.flipIn.bind(this, flip, d, null));
+      requestAnimationFrame(El.bind(this.flipIn, this, flip, d, null));
       return d.promise();
     }
     
@@ -369,7 +238,7 @@
       return d.resolve(time);
     }
     
-    requestAnimationFrame(this.flipIn.bind(this, flip, d, start));
+    requestAnimationFrame(El.bind(this.flipIn, this, flip, d, start));
   };
 
   Flipper.prototype.teardown = function() {
@@ -435,7 +304,7 @@
 
   Flipper.prototype.trigger = function(evt, data) {
     this._events[evt] = this._events[evt] || [];
-    this._events[evt].forEach(function(fn) {
+    El.each(this._events[evt], function(fn) {
       fn(data);
     });
   };
@@ -446,7 +315,7 @@
    * Provides multiple digit flippers
    */
   var MultiFlip = function(el, digits) {
-    var flippers = [], $flipper, flipper;
+    var flippers = [], flipper, flipper, $flipper;
 
     el = El(el);
     
@@ -461,7 +330,7 @@
       $flipper.appendTo(el);
       
       if(flippers[i-1]) {
-        flippers[i - 1].on('loop', flipper.run.bind(flipper, flipper.increase, 1, flippers[i-1]));
+        flippers[i - 1].on('loop', El.bind(flipper.run, flipper, flipper.increase, 1, flippers[i-1]));
       }
     }
     
@@ -486,6 +355,8 @@
       controller.run(controller.increase, Math.abs(difference));
     }
   };
+
+	MultiFlip.Flipper = Flipper;
 
   exports.NumberFlipper = MultiFlip;
 

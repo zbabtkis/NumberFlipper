@@ -1,9 +1,25 @@
 var gulp = require('gulp')
   , uglify = require('gulp-uglify')
-  , cssmin = require('gulp-cssmin');
+  , cssmin = require('gulp-cssmin')
+  , mochaPhantomJs = require('gulp-mocha-phantomjs');
+
+gulp.task('test', function() {
+	var exp = gulp
+		.src('test-runner.html')
+		.pipe(mochaPhantomJs());
+
+	return exp;
+});
+
+gulp.task('watch', function() {
+	gulp.watch('src/*.js', ['test']);
+	gulp.watch('test/*.js', ['test']);
+});
 
 gulp.task('uglify', function() {
-  gulp.src('src/number-flipper.js')
+  gulp.src([
+		'src/helpers.js'], 
+		['src/number-flipper.js'])
     .pipe(uglify())
     .pipe(gulp.dest('dist/'));
 });
