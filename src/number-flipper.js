@@ -25,17 +25,37 @@
     this.setLayer(Flipper.Layers.FLIP, this.createTile(0)).show();
   };
 
-  Flipper.RAM = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame;
+  Flipper.RAM = function() {
+  	switch(true) {
+			case !!window.requestAnimationFrame:
+				window.requestAnimationFrame.apply(window, arguments);
+				break;
+			case !!window.webkitRequestAnimationFrame:
+				window.webkitRequestAnimationFrame.apply(window, arguments);
+				break;
+			case !!window.mozRequestAnimationFrame:
+				window.webkitRequestAnimationFrame.apply(window, arguments);
+				break;
+			case !!window.oRequestAnimationFrame:
+				window.webkitRequestAnimationFrame.apply(window, arguments);
+				break;
+			default:
+				shim.apply(window, arguments);
+		}
+
+		function shim() {
+			Flipper.RAM.state = Flipper.RAM.state || 0;
+			setTimeout(function() {
+				var args = [].slice.call(arguments, 0);
+				args.push(Flipper.RAM.state)
+				cb.apply(window, args);
+				Flipper.RAM.state += 1000/60; 
+			}, 1000/60);
+		}
+	};
 
 	// RequestAnimationFrame shim
   Flipper.RAM = Flipper.RAM || function(cb) {
-  	Flipper.RAM.state = Flipper.RAM.state || 0;
-		setTimeout(function() {
-			var args = [].slice.call(arguments, 0);
-			args.push(Flipper.RAM.state)
-			cb.apply(window, args);
-			Flipper.RAM.state += 1000/60; 
-		}, 1000/60);
 	};
 
   // Class methods
