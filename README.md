@@ -1,4 +1,4 @@
-About
+NumberFlipper.js
 =====
 Put a train arrivals board in your browser!
 
@@ -16,6 +16,12 @@ var el     = document.getElementById("myflipper"); // Selector to render the Num
 var digits  = 2; // Number of digits number flipper should contain
 
 e.g. myFlipper = new NumberFlipper(el, digits);
+```
+
+Flip to a number
+
+```javascript
+myFlipper.run(24);
 ```
 
 Coming Soon
