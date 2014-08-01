@@ -12,16 +12,19 @@ Use
 Instantiate a new NumberFlipper:
 
 ```javascript
-var el     = document.getElementById("myflipper"); // Selector to render the NumberFlipper in
-var digits  = 2; // Number of digits number flipper should contain
+var 
+var 
 
-e.g. myFlipper = new NumberFlipper(el, digits);
+var myFlipper = new NumberFlipper({
+	el:     document.querySelector("#myflipper"), // Selector to render the NumberFlipper in
+	digits: 2                                     // Number of digits number flipper should contain
+});
 ```
 
 Flip to a number
 
 ```javascript
-myFlipper.run(24);
+myFlipper.flipTo(24);
 ```
 
 Support

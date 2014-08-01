@@ -141,6 +141,14 @@
 		};
 	};
 
+	El.extend = function(src, add) {
+		for(var i in add) {
+			if(!src.hasOwnProperty(i)) {
+				src[i] = add[i];
+			}
+		}
+	};
+
 	exports.NumberFlipperEl = El;
 
 }).call(this, this);

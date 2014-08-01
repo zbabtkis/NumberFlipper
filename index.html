@@ -12,7 +12,10 @@
 		<script src="dist/helpers.js"></script>
     <script src="dist/number-flipper.js"></script>
     <script>
-      new NumberFlipper(document.getElementById("myflipper"), 2).run(23);
+			new NumberFlipper({
+				el: document.getElementById("myflipper"),
+				digits: 2
+			}).flipTo(23);
     </script>
   </body>
 

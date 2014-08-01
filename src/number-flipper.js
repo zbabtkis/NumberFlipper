@@ -103,8 +103,6 @@
   Flipper.Classes[Flipper.Layers.MASK_ABOVE] = 'mask';
   Flipper.Classes[Flipper.Layers.MASK_BELOW] = 'mask';
 
-  Flipper.Sets.SingleDigit = Flipper.FlipRange(0, 9);
-
   Flipper.prototype.getIndex = function(index) {
     return this.index;
   };
@@ -347,18 +345,22 @@
    * ---------
    * Provides multiple digit flippers
    */
-  var MultiFlip = function(el, digits) {
-    var flippers = [], flipper, flipper, $flipper;
+  var MultiFlip = function(options) {
+    var flippers = [], el, flipper, $flipper;
 
-    el = El(el);
-    
+  	El.extend(options, {
+			digits: 2
+		});
+
+
+    el = El(options.el);
     el.addClass('multiflip');
     
-    for(var i = 0; i < digits; i++) {
+    for(var i = 0, digits = options.digits; i < digits; i++) {
       var margin = digits * 65 - i * 65 - 65;
       $flipper = El(document.createElement("div"));
       $flipper.css('left', margin + 'px');
-      flipper = new Flipper($flipper, Flipper.Sets.SingleDigit);
+      flipper = new Flipper($flipper, Flipper.FlipRange(0, 9));
       flippers.push(flipper);
       $flipper.appendTo(el);
       
@@ -367,16 +369,16 @@
       }
     }
     
-    this.digits        = digits;
+    this.digits        = options.digits;
     this.currentNumber = 0;
     this.flippers      = flippers;
   };
 
-  MultiFlip.prototype.run = function(number) {
-    this.flipTo(this.flippers[0], number);
+  MultiFlip.prototype.flipTo = function(number) {
+    this._performFlip(this.flippers[0], number);
   };
 
-  MultiFlip.prototype.flipTo = function(controller, number) {
+  MultiFlip.prototype._performFlip = function(controller, number) {
     var difference = number - this.currentNumber;
       
     if(difference < 0) {
