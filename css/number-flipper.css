@@ -3,16 +3,19 @@
   position: relative;
 }
 .flipper {
-  position: absolute;
+  position: relative;
+  width: 60px;
+  height: 100px;
+  float: left;
+  margin-left: 5px;
 }
 
 .tile {
   list-style: none;
   padding: 3px 5px;
-  width: 60px;
-  height: 100px;
   text-align:center;
   color:#fff;
+  width: 100%;
   font-size: 100px;
   line-height: 100px;
   perspective: 30px;
@@ -23,7 +26,7 @@
 
 .mask {
   height: 50px;
-  width: 60px;
+  width: 100%;
   position: absolute;
   overflow: hidden;
 }

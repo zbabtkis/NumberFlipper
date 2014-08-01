@@ -407,9 +407,7 @@
     el.addClass('multiflip');
 
     for(var i = 0, digits = options.digits; i < digits; i++) {
-      var margin = digits * 65 - i * 65 - 65;
       $flipper = El(document.createElement("div"));
-      $flipper.css('left', margin + 'px');
       flipper = new Flipper($flipper, Flipper.FlipRange(0, 9));
       flippers.push(flipper);
       $flipper.appendTo(el);
