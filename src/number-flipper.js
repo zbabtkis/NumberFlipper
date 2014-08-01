@@ -25,7 +25,7 @@
     this.setLayer(Flipper.Layers.FLIP, this.createTile(0)).show();
   };
 
-  Flipper.RAM = function() {
+  Flipper.RAM = function(cb) {
   	switch(true) {
 			case !!window.requestAnimationFrame:
 				window.requestAnimationFrame.apply(window, arguments);
@@ -337,7 +337,7 @@
 
   Flipper.prototype.trigger = function(evt, data) {
     this._events[evt] = this._events[evt] || [];
-    El.each(this._events[evt], function(fn) {
+    El.each(this._events[evt], function(ind, fn) {
       fn(data);
     });
   };

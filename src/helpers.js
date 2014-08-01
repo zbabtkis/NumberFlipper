@@ -108,13 +108,13 @@
 		return el;
 	};
 
-	El.each = El.each || function(list, cb) {
+	El.each = function(list, cb) {
 		for(var i = 0, j=list.length; i < j; i++) {
 			cb(i, list[i]);
 		} 
 	};
 
-	El.Deferred = El.Deferred || function() {
+	El.Deferred = function() {
 		var _cbs = [];
 
 		return {
