@@ -6,6 +6,15 @@ NumberFlipper provides a flexible, vanilla JavaScript (yep, no jQuery needed), a
 
 You can even define how many digits you would like each instance to display.
 
+For a demo check out http://zigzackattack.github.com/NumberFlipper
+
+Install
+=======
+
+```bash
+bower install --save number-flipper
+```
+
 Use
 ===
 
