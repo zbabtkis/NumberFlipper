@@ -24,6 +24,12 @@ Flip to a number
 myFlipper.run(24);
 ```
 
+Support
+=======
+
+Well... I've only tested it in Chrome, but it should work in all browsers that support CSS3 transforms (IE 9+). If you need more support add a transform polyfill to your page:
+http://www.useragentman.com/blog/2010/03/09/cross-browser-css-transforms-even-in-ie/
+
 Coming Soon
 ===========
 
