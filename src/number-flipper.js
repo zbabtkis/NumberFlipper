@@ -181,8 +181,11 @@
         el.html(val);
         break;
       case 'object':
-        el.html('');
-        el.append(val);
+        if(typeof val.html === 'function') {
+          el.html(val.html());
+        } else if(val.outerHTML) {
+          el.html(val.outerHTML)
+        }
         break;
       default:
         break;
