@@ -9,6 +9,13 @@ You can even define how many digits you would like each instance to display.
 Use
 ===
 
+Include the minified script and stylesheet in your document
+
+```html
+<link rel="stylesheet" href="vendor/NumberFlipper/dist/number-flipper.css" />
+<script src="vendor/NumberFlipper/dist/number-flipper.min.js"></script>
+```
+
 Instantiate a new NumberFlipper:
 
 ```javascript

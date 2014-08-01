@@ -1,6 +1,7 @@
 var gulp = require('gulp')
-  , uglify = require('gulp-uglify')
+  , uglify = require('gulp-uglifyjs')
   , cssmin = require('gulp-cssmin')
+  , concat = require('gulp-concat')
   , mochaPhantomJs = require('gulp-mocha-phantomjs');
 
 gulp.task('test', function() {
@@ -20,6 +21,7 @@ gulp.task('uglify', function() {
   gulp.src([
 		'src/helpers.js', 
 		'src/number-flipper.js'])
+		.pipe(concat('number-flipper.min.js'))
     .pipe(uglify({outSourceMap: true}))
     .pipe(gulp.dest('dist'));
 });
