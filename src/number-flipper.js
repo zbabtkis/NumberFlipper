@@ -368,7 +368,8 @@
   };
 
   Flipper.prototype.flipToNext = function() {
-    var flip = this.transitionNumbers(this.increase, 1);
+    var flip = this.transitionNumbers(this.increase, 1)
+      _this  = this;
 
     this.setupFlip(flip);
     this.flipAway(flip)
