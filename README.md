@@ -21,8 +21,8 @@ Use
 Include the minified script and stylesheet in your document
 
 ```html
-<link rel="stylesheet" href="vendor/NumberFlipper/dist/number-flipper.css" />
-<script src="vendor/NumberFlipper/dist/number-flipper.min.js"></script>
+<link rel="stylesheet" href="bower_components/NumberFlipper/dist/number-flipper.css" />
+<script src="bower_components/NumberFlipper/dist/number-flipper.min.js"></script>
 ```
 
 Instantiate a new NumberFlipper:
