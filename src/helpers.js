@@ -50,6 +50,18 @@
 			return this;
 		};
 
+		// prependTo
+		el.prependTo = function(par) {
+			this.remove();
+      if(par.children[0]) {
+        par.insertBefore(this, par.children[0]);
+      } else {
+        this.appendTo(par);
+      }
+
+			return this;
+		};
+
 		// show
 		el.show = function() {
 			this.style.display = 'block';

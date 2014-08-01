@@ -12,7 +12,6 @@
 
 .tile {
   list-style: none;
-  padding: 3px 5px;
   text-align:center;
   color:#fff;
   width: 100%;
@@ -38,6 +37,7 @@
 }
 
 .tile-inner {
+  padding: 3px 5px;
   border-radius: 5px;
   background: #df300d; /* Old browsers */
    background: -moz-linear-gradient(top,  #df300d 0%, #df300d 49%, #ffffff 49%, #ffffff 49%, #ffffff 51%, #b42801 51%, #b42801 100%); /* FF3.6+ */
