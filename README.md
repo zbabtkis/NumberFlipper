@@ -12,12 +12,9 @@ Use
 Instantiate a new NumberFlipper:
 
 ```javascript
-var 
-var 
-
 var myFlipper = new NumberFlipper({
-	el:     document.querySelector("#myflipper"), // Selector to render the NumberFlipper in
-	digits: 2                                     // Number of digits number flipper should contain
+	el: document.querySelector("#myflipper"), // Selector to render the NumberFlipper in
+	digits: 2                                 // Number of digits number flipper should contain
 });
 ```
 
