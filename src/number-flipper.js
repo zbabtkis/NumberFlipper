@@ -20,9 +20,9 @@
 
     this._events = {};
 
-    this.index = 0;
+    this.setIndex(0);
 
-    this.setLayer(Flipper.Layers.FLIP, this.createTile(0)).show();
+    this.setLayer(Flipper.Layers.FLIP, this.createTile(this.mf[this.getIndex()])).show();
   };
 
   // Constants
@@ -154,6 +154,8 @@
     if(next === 0 && curr > next) {
       this.trigger('loop');
     }
+
+    console.log(this.mf);
 
     // Data needed to animate transition
     return {
