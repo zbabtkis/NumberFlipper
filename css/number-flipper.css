@@ -28,17 +28,18 @@
   height: 50%;
   width: 100%;
   position: absolute;
-  overflow: hidden;
 }
 .mask.below {
   -webkit-transform: translateY(100%);
+  overflow: hidden;
 }
 .mask.below .mask-inner {
- -webkit-transform: translateY(-50%);
+  overflow: visible;
+  -webkit-transform: translateY(-100%);
 }
 
 .tile-inner {
-  padding: 3px 5px;
+  overflow: hidden;
   border-radius: 5px;
   height: 100%;
   background: #df300d; /* Old browsers */
@@ -49,7 +50,4 @@
   background: -ms-linear-gradient(top,  #df300d 0%,#df300d 49%,#ffffff 49%,#ffffff 49%,#ffffff 51%,#b42801 51%,#b42801 100%); /* IE10+ */
   background: linear-gradient(to bottom,  #df300d 0%,#df300d 49%,#ffffff 49%,#ffffff 49%,#ffffff 51%,#b42801 51%,#b42801 100%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df300d', endColorstr='#b42801',GradientType=0 ); /* IE6-9 */
-}
-.tile-inner.mask-inner {
-  box-shadow: none;
 }
