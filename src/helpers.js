@@ -4,6 +4,9 @@
 	var El = function(el) {
 		var CLASS_SEPARATOR = " ";
 
+    // To check if el has been extended
+    el.isNF = true;
+
 		el.addClass = function(className) {
 			var cs = el.className ? CLASS_SEPARATOR : "";
 			if(! el.className.match(className)) {

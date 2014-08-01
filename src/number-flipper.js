@@ -9,7 +9,7 @@
   var El = exports.NumberFlipperEl;
 
   var Flipper = function(el, mf) {
-    this.el = el;
+    this.el  = el.isNF ? el : new El(el);
     this.mf  = mf;
     this._domLayers = [];
 
@@ -168,10 +168,23 @@
    * @param {Number} number - number to display in DOMElement
    * @return {DOMElement} - new tile
    */
-  Flipper.prototype.createTile = function(number) {
+  Flipper.prototype.createTile = function(val) {
     var el = El(document.createElement('div'));
     el.addClass('tile-inner');
-    el.text(number);
+    switch(typeof val) {
+      case 'number':
+        el.text(val);
+        break;
+      case 'string':
+        el.html(val);
+        break;
+      case 'object':
+        el.html('');
+        el.append(val);
+        break;
+      default:
+        break;
+    }
 
     return el;
   };
@@ -350,7 +363,18 @@
 
   Flipper.prototype.warpSpeed = function(x, L) {
     return Math.pow(L/2 - Math.abs(x - L/2) + 1, 1.25);
-  }
+  };
+
+  Flipper.prototype.flipToNext = function() {
+    var flip = this.transitionNumbers(this.increase, 1);
+
+    this.setupFlip(flip);
+    this.flipAway(flip)
+      .then(function() {
+        _this.setupFinalFlip(flip);
+        _this.flipIn(flip)
+      });
+  };
 
   Flipper.prototype.run = function(strategy, it, curr) {
     var curr, flip, _this = this;
