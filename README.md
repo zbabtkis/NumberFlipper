@@ -9,14 +9,14 @@ You can even define how many digits you would like each instance to display.
 For a demo check out http://zigzackattack.github.com/NumberFlipper
 
 Install
-=======
+-------
 
 ```bash
 bower install --save number-flipper
 ```
 
 Use
-===
+---
 
 Include the minified script and stylesheet in your document
 
@@ -41,12 +41,14 @@ myFlipper.flipTo(24);
 ```
 
 Support
-=======
+-------
 
 Well... I've only tested it in Chrome, but it should work in all browsers that support CSS3 transforms (IE 9+). If you need more support add a transform polyfill to your page:
 http://www.useragentman.com/blog/2010/03/09/cross-browser-css-transforms-even-in-ie/
 
 Coming Soon
-===========
+-----------
 
 * Set number range to use in single digit displays. For example, 0-6 for second digit of minutes to create a clock!
+* Confirmed cross browser support
+* More unit tests
