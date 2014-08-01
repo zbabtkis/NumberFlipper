@@ -3,19 +3,48 @@
 
   <head>
     <link rel="stylesheet" href="css/number-flipper.css" />
+		<style>
+			#myflipper {
+				height: 100px;
+				width: 60px;
+				padding: 20px;
+			}
+		</style>
   </head>
 
   <body>
     <div id='myflipper'></div>
+		<form id="mf-update">
+
+			<input type="number" 
+				id="mf-value" 
+				min="0"
+				max="99" 
+				placeholder="Enter number to flip to" 
+				value="00" />
+
+			<button type="submit">Update</button>
+		</form>
 
     <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
     <script src="dist/number-flipper.min.js"></script>
     <script>
-			new NumberFlipper({
+			var nf = new NumberFlipper({
 				el: document.getElementById("myflipper"),
 				digits: 2
-			}).flipTo(23);
+			});
     </script>
+		<script>
+			console.log('loaded');
+			function updateNumber(e) {
+				var val = parseInt(document.getElementById('mf-value').value);
+				e.preventDefault();
+				nf.flipTo(val);
+			}
+
+			document.getElementById('mf-update')
+				.addEventListener('submit', updateNumber);
+		</script>
   </body>
 
 </html>
