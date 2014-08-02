@@ -374,7 +374,7 @@
     var flip  = this.transitionNumbers(this.increase, 1)
       , _this = this;
 
-    this._el.css('z-index', 100);
+    this.el.css('z-index', 100);
 
     this.setupFlip(flip);
     this.flipAway(flip)
