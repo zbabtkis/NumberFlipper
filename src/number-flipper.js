@@ -9,7 +9,7 @@
   var El = exports.NumberFlipperEl;
 
   var Flipper = function(el, mf) {
-    this.el = el;
+    this.el  = el.isNF ? el : new El(el);
     this.mf  = mf;
     this._domLayers = [];
 
@@ -20,9 +20,9 @@
 
     this._events = {};
 
-    this.index = 0;
+    this.setIndex(0);
 
-    this.setLayer(Flipper.Layers.FLIP, this.createTile(0)).show();
+    this.setLayer(Flipper.Layers.FLIP, this.createTile(this.mf[this.getIndex()])).show();
   };
 
   // Constants
@@ -155,6 +155,8 @@
       this.trigger('loop');
     }
 
+    console.log(this.mf);
+
     // Data needed to animate transition
     return {
       current: this.mf[curr],
@@ -168,10 +170,26 @@
    * @param {Number} number - number to display in DOMElement
    * @return {DOMElement} - new tile
    */
-  Flipper.prototype.createTile = function(number) {
+  Flipper.prototype.createTile = function(val) {
     var el = El(document.createElement('div'));
     el.addClass('tile-inner');
-    el.text(number);
+    switch(typeof val) {
+      case 'number':
+        el.text(val);
+        break;
+      case 'string':
+        el.html(val);
+        break;
+      case 'object':
+        if(typeof val.html === 'function') {
+          el.html(val.html());
+        } else if(val.outerHTML) {
+          el.html(val.outerHTML)
+        }
+        break;
+      default:
+        break;
+    }
 
     return el;
   };
@@ -179,8 +197,8 @@
   /**
    * Creates a tile with half-height
    */
-  Flipper.prototype.createHalfTile = function(number, position, step) {
-    return this.createTile(number).addClass('mask-inner');
+  Flipper.prototype.createHalfTile = function(content, position, step) {
+    return this.createTile(content).addClass('mask-inner');
   }
 
   /**
@@ -350,7 +368,24 @@
 
   Flipper.prototype.warpSpeed = function(x, L) {
     return Math.pow(L/2 - Math.abs(x - L/2) + 1, 1.25);
-  }
+  };
+
+  Flipper.prototype.flipToNext = function() {
+    var flip  = this.transitionNumbers(this.increase, 1)
+      , _this = this;
+
+    this._el.css('z-index', 100);
+
+    this.setupFlip(flip);
+    this.flipAway(flip)
+      .then(function() {
+        _this.setupFinalFlip(flip);
+        _this.flipIn(flip)
+        .then(function() {
+					_this.el.css('z-index', 0);
+				});
+      });
+  };
 
   Flipper.prototype.run = function(strategy, it, curr) {
     var curr, flip, _this = this;
@@ -407,12 +442,10 @@
     el.addClass('multiflip');
 
     for(var i = 0, digits = options.digits; i < digits; i++) {
-      var margin = digits * 65 - i * 65 - 65;
       $flipper = El(document.createElement("div"));
-      $flipper.css('left', margin + 'px');
       flipper = new Flipper($flipper, Flipper.FlipRange(0, 9));
       flippers.push(flipper);
-      $flipper.appendTo(el);
+      $flipper.prependTo(el);
 
       if(flippers[i-1]) {
         flippers[i - 1].on('loop', El.bind(flipper.run, flipper, flipper.increase, 1, flippers[i-1]));
