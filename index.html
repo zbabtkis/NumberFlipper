@@ -3,13 +3,6 @@
 
   <head>
     <link rel="stylesheet" href="css/number-flipper.css" />
-		<style>
-			#myflipper {
-				height: 100px;
-				width: 60px;
-				padding: 20px;
-			}
-		</style>
   </head>
 
   <body>
@@ -32,7 +25,7 @@
 			var nf = new NumberFlipper({
 				el: document.getElementById("myflipper"),
 				digits: 2
-			});
+			}).flipTo(22);
     </script>
 		<script>
 			console.log('loaded');
