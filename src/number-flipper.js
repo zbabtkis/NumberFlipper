@@ -197,8 +197,8 @@
   /**
    * Creates a tile with half-height
    */
-  Flipper.prototype.createHalfTile = function(number, position, step) {
-    return this.createTile(number).addClass('mask-inner');
+  Flipper.prototype.createHalfTile = function(content, position, step) {
+    return this.createTile(content).addClass('mask-inner');
   }
 
   /**
@@ -374,11 +374,16 @@
     var flip  = this.transitionNumbers(this.increase, 1)
       , _this = this;
 
+    //this.el.children[0].css('z-index', 100);
+
     this.setupFlip(flip);
     this.flipAway(flip)
       .then(function() {
         _this.setupFinalFlip(flip);
         _this.flipIn(flip)
+        .then(function() {
+					//_this.el.children[0].css('z-index', 0);
+				});
       });
   };
 
