@@ -293,21 +293,21 @@
     this.rotateDomElement(layer.children[0], rotation);
     this.flipAccelleration.tick(progress)
 
-      if(rotation === -90) {
-        return d.resolve();
-      }
+		if(rotation === -90) {
+			return d.resolve();
+		}
 
     Flipper.RAM(El.bind(this.flipAway, this, flip, d, start));
   };
 
   Flipper.prototype.setupFinalFlip = function(flip) {
     this.setLayer(Flipper.Layers.MASK_ABOVE, 
-        this.createHalfTile(flip.after)
-        ).addClass('above').show();
+			this.createHalfTile(flip.after)
+		).addClass('above').show();
 
     this.setLayer(Flipper.Layers.FLIP, 
-        this.createTile(flip.after)
-        );
+			this.createTile(flip.after)
+		);
   };
 
   Flipper.prototype.flipIn = function(flip, d, start, time) {

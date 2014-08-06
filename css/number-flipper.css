@@ -28,14 +28,24 @@
   height: 50%;
   width: 100%;
   position: absolute;
+	overflow-y: hidden;
 }
+
 .mask.below {
   -webkit-transform: translateY(100%);
   overflow: hidden;
 }
+
 .mask.below .mask-inner {
   overflow: visible;
-  -webkit-transform: translateY(-100%);
+  display: block;
+  position: relative;
+  height: 200%;
+  -webkit-transform: translateY(-50%);
+}
+
+.mask.above .mask-inner {
+	height: 200%;
 }
 
 .tile-inner {

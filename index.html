@@ -20,12 +20,15 @@
 		</form>
 
     <!-- <script src="bower_components/jquery/dist/jquery.min.js"></script> -->
-    <script src="dist/number-flipper.min.js"></script>
+    <script src="src/helpers.js"></script>
+    <script src="src/number-flipper.js"></script>
     <script>
 			var nf = new NumberFlipper({
 				el: document.getElementById("myflipper"),
 				digits: 2
-			}).flipTo(22);
+			});
+
+			nf.flipTo(22);
     </script>
 		<script>
 			console.log('loaded');
