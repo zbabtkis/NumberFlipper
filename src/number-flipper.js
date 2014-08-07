@@ -155,8 +155,6 @@
       this.trigger('loop');
     }
 
-    console.log(this.mf);
-
     // Data needed to animate transition
     return {
       current: this.mf[curr],
