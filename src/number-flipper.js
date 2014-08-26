@@ -468,7 +468,7 @@
       $flipper.prependTo(el);
 
       if(flippers[i-1]) {
-        flippers[i - 1].on('loop', El.bind(flipper.run, flipper, flipper.increase, 1, flippers[i-1]));
+        flippers[i - 1].on('loop', El.bind(flipper.run, flipper, flipper.increase, 1));
       }
     }
 
