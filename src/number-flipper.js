@@ -10,16 +10,23 @@
 
   var Flipper = function(el, mf) {
     this.el  = el.isNF ? el : new El(el);
+
+    // The source of tiles to flip
     this.mf  = mf;
+
+    // Holds layers of flipper widget and across the z-index
     this._domLayers = [];
 
+    // Give the flipper a class name for making it beautiful!
     el.addClass('flipper');
 
     this.increase = El.bind(this.increase, this);
     this.decrease = El.bind(this.decrease, this);
 
+    // Tracks callbacks for flipper events
     this._events = {};
 
+    // The flipper should start out at the first tile in the range
     this.setIndex(0);
 
     this.setLayer(Flipper.Layers.FLIP, this.createTile(this.mf[this.getIndex()])).show();
@@ -83,8 +90,22 @@
   Flipper.FlipRange = function (start, end) {
     var arr = [];
 
-    for(var i = start; i <= end; i++) {
-      arr.push(i);
+    if(typeof start !== 'number' || typeof end !== 'number') {
+      throw new TypeError("start and end range must be numbers");
+    }
+
+    // If start is less than end, create range going up
+    if ( start < end ) {
+      for(var i = start; i <= end; i++) {
+        arr.push(i);
+      }
+    // if Start is greater than end, range should loop down
+    } else if ( start > end ) {
+      for(var i = start; i >= end; i--) {
+        arr.push(i);
+      }
+    } else {
+      arr = [start];
     }
 
     return arr;
