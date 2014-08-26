@@ -450,7 +450,7 @@
    * Provides multiple digit flippers
    */
   var MultiFlip = function(options) {
-    var flippers = [], el, flipper, $flipper;
+    var flippers = [], el, flipper, $flipper, range;
 
     El.extend(options, {
       digits: 2
@@ -461,8 +461,9 @@
     el.addClass('multiflip');
 
     for(var i = 0, digits = options.digits; i < digits; i++) {
+      range = (options.ranges && options.ranges[i]) ? options.ranges[i] : Flipper.FlipRange(0, 9);
       $flipper = El(document.createElement("div"));
-      flipper = new Flipper($flipper, Flipper.FlipRange(0, 9));
+      flipper = new Flipper($flipper, range);
       flippers.push(flipper);
       $flipper.prependTo(el);
 

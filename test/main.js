@@ -25,6 +25,24 @@ suite("NumberFlipper", function() {
 
 	});
 
+  suite("NumberFlipper", function() {
+    test("can use ranges defined in constructor", function() {
+      var fr = NumberFlipper.Flipper.FlipRange(6, 0);
+
+      var nf = new NumberFlipper({
+        el: document.createElement('div'),
+        digits: 2,
+        ranges: [
+          fr,
+          fr
+        ]
+      });
+
+      expect(nf.flippers[0].mf).to.equal(fr);
+      expect(nf.flippers[1].mf).to.equal(fr);
+    });
+  });
+
 	suite("Rotation", function() {
 
 		suite("#getRotationAtTime()", function() {
