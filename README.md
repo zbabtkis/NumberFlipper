@@ -30,7 +30,11 @@ Instantiate a new NumberFlipper:
 ```javascript
 var myFlipper = new NumberFlipper({
 	el: document.querySelector("#myflipper"), // Selector to render the NumberFlipper in
-	digits: 2                                 // Number of digits number flipper should contain
+	digits: 2,                                // Number of digits number flipper should contain
+  ranges: [                                 // Range for each digit
+    NumberFlipper.Flipper.FlipRange(6, 0),
+    NumberFlipper.Flipper.FlipRange(6, 0)
+  ]
 });
 ```
 
@@ -39,6 +43,21 @@ Flip to a number
 ```javascript
 myFlipper.flipTo(24);
 ```
+
+## NumberFlipper.Flipper.FlipRange
+FlipRanges are used to generate a numeric array of numbers to flip through. The FlipRange function can create arrays with ascending and descending values.
+
+```javascript
+NumberFlipper.Flipper.FlipRange(/** start number */ 0, /** end number */ 5);
+```
+
+would generate [0, 1, 2, 3, 4, 5]
+
+```javascript
+NumberFlipper.Flipper.FlipRange(/** start number */ 5, /** end number */ 0);
+```
+
+would generate [5, 4, 3, 2, 1, 0]
 
 Support
 -------
