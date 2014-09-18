@@ -368,6 +368,9 @@
 
   Flipper.prototype.rotateDomElement = function (el, movement) {
     El(el).css('-webkit-transform', 'rotateX(' + movement + 'deg)');
+    El(el).css('-o-transform', 'rotateX(' + movement + 'deg)');
+    El(el).css('-ms-transform', 'rotateX(' + movement + 'deg)');
+    El(el).css('transform', 'rotateX(' + movement + 'deg)');
   };
 
   /**

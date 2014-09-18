@@ -2,6 +2,7 @@
 .multiflip {
   position: relative;
 }
+
 .flipper {
   position: relative;
   width: 60px;
@@ -18,10 +19,18 @@
   height: 100%;
   font-size: 100px;
   line-height: 100px;
-  perspective: 500px;
   position: absolute;
   z-index: 0;
   -webkit-perspective: 500px;
+  -moz-perspective: 500px;
+  -o-perspective: 500px;
+  -ms-perspective: 500px;
+  perspective: 500px;
+  -webkit-transition: all 0.05s;
+  -moz-transition: all 0.05s;
+  -o-transition: all 0.05s;
+  -ms-transition: all 0.05s;
+  transition: all 0.05s;
 }
 
 .mask {
@@ -33,6 +42,10 @@
 
 .mask.below {
   -webkit-transform: translateY(100%);
+  -moz-transform: translateY(100%);
+  -o-transform: translateY(100%);
+  -ms-transform: translateY(100%);
+  transform: translateY(100%);
   overflow: hidden;
 }
 
@@ -42,6 +55,10 @@
   position: relative;
   height: 200%;
   -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 .mask.above .mask-inner {
