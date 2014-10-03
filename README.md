@@ -62,8 +62,10 @@ would generate [5, 4, 3, 2, 1, 0]
 Support
 -------
 
-Well... I've only tested it in Chrome, but it should work in all browsers that support CSS3 transforms (IE 9+). If you need more support add a transform polyfill to your page:
+NumberFlipper works in all modern browsers that support CSS3 transforms (IE 9+). If you need more support add a transform polyfill to your page:
 http://www.useragentman.com/blog/2010/03/09/cross-browser-css-transforms-even-in-ie/
+
+There is currently a bug in Chrome that prevents the perspective change from overflowing outside of the NumberFlipper element. Any pull requests that propose a workaround to this bug are welcome!
 
 Coming Soon
 -----------
